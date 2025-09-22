@@ -21,7 +21,7 @@ const errorHandler = require('./middlewares/errorHandler'); // Middleware de err
 
 // Configuración de la aplicación Express
 const app = express();     // Instancia principal de Express
-const port = process.env.PORT || 3001;         // Puerto del servidor (dinámico para Vercel)
+const port = process.env.PORT;         // Puerto del servidor (dinámico para Vercel)
 
 // Middlewares globales
 app.use(express.json());   // Middleware para parsear JSON en requests
