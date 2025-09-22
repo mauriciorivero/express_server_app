@@ -26,6 +26,18 @@ const port = process.env.PORT;         // Puerto del servidor (dinámico para Ve
 // Middlewares globales
 app.use(express.json());   // Middleware para parsear JSON en requests
 
+// Ruta raíz
+app.get('/', (req, res) => {
+    res.json({
+        message: 'API REST de Gestión de Tareas (ToDo)',
+        version: '1.0.0',
+        endpoints: {
+            todos: '/todos',
+            docs: 'Ver README.md para documentación completa'
+        }
+    });
+});
+
 // Configuración de rutas
 // Todas las rutas relacionadas con ToDos estarán bajo /todos
 app.use('/todos', todoRoutes);
@@ -33,8 +45,13 @@ app.use('/todos', todoRoutes);
 // Middleware de manejo de errores (debe ir al final)
 app.use(errorHandler);
 
-// Inicio del servidor
-app.listen(port, () => {
-    console.log(`Servidor corriendo en el puerto ${port}`);
-    console.log(`API disponible en: http://localhost:${port}/todos`);
-});
+// Exportar la aplicación para Vercel (serverless)
+module.exports = app;
+
+// Solo para desarrollo local
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Servidor corriendo en el puerto ${port}`);
+        console.log(`API disponible en: http://localhost:${port}/todos`);
+    });
+}

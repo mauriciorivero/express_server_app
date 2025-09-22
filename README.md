@@ -7,7 +7,7 @@ Esta es una aplicación API REST completa para gestionar tareas (ToDos) construi
 ## 📚 Tecnologías Utilizadas
 
 - **Node.js**: Entorno de ejecución JavaScript del lado del servidor
-- **Express.js**: Framework web minimalista para Node.js
+- **Express.js**: Framework web minimalista para Node.js (versión 4.18.2)
 - **MongoDB Atlas**: Base de datos NoSQL en la nube
 - **Mongoose/MongoDB Driver**: Para la conexión y operaciones con MongoDB
 
