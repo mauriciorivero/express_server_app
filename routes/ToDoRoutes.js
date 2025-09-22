@@ -21,12 +21,6 @@ const router = express.Router();
 // Crear instancia del controlador
 const controller = new ToDoController();
 
-// Conectar a MongoDB al inicializar las rutas
-// Esto asegura que la conexión esté disponible antes de procesar requests
-(async () => {
-    await controller.connect();
-})();
-
 // ===== DEFINICIÓN DE RUTAS CRUD =====
 
 // GET /todos - Obtener todas las tareas

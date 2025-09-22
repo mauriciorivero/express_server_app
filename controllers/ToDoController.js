@@ -27,7 +27,13 @@ class ToDoController {
      * @returns {Promise<void>}
      */
     async connect() {
-        await this.mongo.connect();
+        try {
+            await this.mongo.connect();
+            console.log('Conectado exitosamente a MongoDB');
+        } catch (error) {
+            console.error('Error conectando a MongoDB:', error.message);
+            throw error;
+        }
     }
 
     /**
@@ -39,6 +45,9 @@ class ToDoController {
      */
     async getAll(req, res, next) {
         try {
+            // Establecer conexión con la base de datos
+            await this.connect();
+
             // Obtener todas las tareas de la base de datos
             const todos = await this.mongo.getAllToDos();
 
@@ -59,6 +68,9 @@ class ToDoController {
      */
     async getById(req, res, next) {
         try {
+            // Establecer conexión con la base de datos
+            await this.connect();
+
             // Convertir el parámetro de ruta a número
             const id = parseInt(req.params.id);
 
@@ -87,6 +99,9 @@ class ToDoController {
      */
     async create(req, res, next) {
         try {
+            // Establecer conexión con la base de datos
+            await this.connect();
+
             // Extraer datos del cuerpo de la solicitud
             const { title, completed = false } = req.body;
 
@@ -121,6 +136,9 @@ class ToDoController {
      */
     async update(req, res, next) {
         try {
+            // Establecer conexión con la base de datos
+            await this.connect();
+
             // Convertir el parámetro de ruta a número
             const id = parseInt(req.params.id);
 
@@ -158,6 +176,9 @@ class ToDoController {
      */
     async delete(req, res, next) {
         try {
+            // Establecer conexión con la base de datos
+            await this.connect();
+
             // Convertir el parámetro de ruta a número
             const id = parseInt(req.params.id);
 
