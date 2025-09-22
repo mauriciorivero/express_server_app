@@ -11,8 +11,10 @@
  * @version 1.0.0
  */
 
-// Cargar variables de entorno
-require('dotenv').config();
+// Cargar variables de entorno solo en desarrollo
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 // Importaciones de módulos
 const express = require('express');                    // Framework web para Node.js
@@ -45,8 +47,10 @@ app.use('/todos', todoRoutes);
 // Middleware de manejo de errores (debe ir al final)
 app.use(errorHandler);
 
-// Exportar la aplicación para Vercel (serverless)
-module.exports = app;
+// Exportar handler para Vercel (serverless)
+module.exports = (req, res) => {
+    return app(req, res);
+};
 
 // Solo para desarrollo local
 if (require.main === module) {
