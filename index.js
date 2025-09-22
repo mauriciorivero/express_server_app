@@ -11,6 +11,9 @@
  * @version 1.0.0
  */
 
+// Cargar variables de entorno
+require('dotenv').config();
+
 // Importaciones de módulos
 const express = require('express');                    // Framework web para Node.js
 const todoRoutes = require('./routes/ToDoRoutes');    // Rutas de la API ToDo
@@ -18,7 +21,7 @@ const errorHandler = require('./middlewares/errorHandler'); // Middleware de err
 
 // Configuración de la aplicación Express
 const app = express();     // Instancia principal de Express
-const port = 3001;         // Puerto del servidor
+const port = process.env.PORT || 3001;         // Puerto del servidor (dinámico para Vercel)
 
 // Middlewares globales
 app.use(express.json());   // Middleware para parsear JSON en requests

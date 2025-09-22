@@ -55,14 +55,23 @@ express_server_app/
    - Crea una cuenta en [MongoDB Atlas](https://www.mongodb.com/atlas)
    - Crea un cluster gratuito
    - Obtén la cadena de conexión (connection string)
-   - La cadena ya está configurada en `models/MongoConnection.js`
 
-4. **Ejecuta la aplicación**
+4. **Configura las variables de entorno**
+   - Crea un archivo `.env` en la raíz del proyecto
+   - Copia el contenido del archivo `.env.example` o configura las siguientes variables:
+     ```
+     MONGO_URI=tu_cadena_de_conexion_aqui
+     DB_NAME=ToDo
+     COLLECTION_NAME=todoList
+     ```
+   - Reemplaza `tu_cadena_de_conexion_aqui` con la cadena de conexión obtenida de MongoDB Atlas
+
+5. **Ejecuta la aplicación**
    ```bash
    node index.js
    ```
 
-5. **Verifica que funciona**
+6. **Verifica que funciona**
    - Abre tu navegador en `http://localhost:3001/todos`
    - Deberías ver una lista de tareas en formato JSON
 
@@ -249,6 +258,44 @@ curl -X PUT http://localhost:3001/todos/1 \
 6. **Documentación**: Comentarios JSDoc en todas las funciones
 7. **Modularidad**: Código organizado en módulos reutilizables
 
+## 🚀 Despliegue en Vercel
+
+Este proyecto está configurado para desplegarse fácilmente en Vercel. Sigue estos pasos:
+
+### Prerrequisitos para Despliegue
+
+- Cuenta en [Vercel](https://vercel.com)
+- Repositorio en GitHub, GitLab o Bitbucket
+
+### Pasos de Despliegue
+
+1. **Conecta tu repositorio a Vercel**
+   - Ve a [vercel.com](https://vercel.com) y crea una cuenta
+   - Haz clic en "New Project" e importa tu repositorio
+
+2. **Configura las variables de entorno**
+   - En el dashboard de Vercel, ve a tu proyecto
+   - Ve a "Settings" > "Environment Variables"
+   - Agrega las siguientes variables:
+     - `MONGO_URI`: Tu cadena de conexión de MongoDB Atlas
+     - `DB_NAME`: `ToDo`
+     - `COLLECTION_NAME`: `todoList`
+
+3. **Despliega**
+   - Vercel detectará automáticamente la configuración en `vercel.json`
+   - El despliegue comenzará automáticamente
+   - Una vez completado, obtendrás una URL como `https://tu-proyecto.vercel.app`
+
+4. **Configura MongoDB Atlas**
+   - Asegúrate de que tu cluster permita conexiones desde cualquier IP (0.0.0.0/0)
+   - O agrega las IPs de Vercel a la whitelist de MongoDB Atlas
+
+### Notas Importantes
+
+- **Tiempo de ejecución**: Vercel tiene límites de 10 segundos para funciones serverless en el plan gratuito
+- **Conexiones a BD**: Las conexiones se cierran entre requests en serverless
+- **Variables de entorno**: Nunca subas `.env` al repositorio (ya está en `.gitignore`)
+
 ## 🚀 Próximos Pasos
 
 - Implementar autenticación JWT
@@ -256,7 +303,7 @@ curl -X PUT http://localhost:3001/todos/1 \
 - Crear tests unitarios e integración
 - Implementar logging avanzado
 - Agregar documentación con Swagger
-- Desplegar en servicios como Heroku o Vercel
+- Desplegar en otros servicios como Heroku
 
 ## 📞 Soporte
 

@@ -16,15 +16,15 @@ class MongoConnection {
      * Inicializa la configuración de conexión a MongoDB Atlas
      */
     constructor() {
-        // URI de conexión a MongoDB Atlas (contiene credenciales)
-        this.uri = 'mongodb+srv://riveromauricio_db_user:Ab3L_R1ve3r0@clusterprueba.crrrhfj.mongodb.net/?retryWrites=true&w=majority&appName=ClusterPrueba';
+        // URI de conexión a MongoDB Atlas desde variables de entorno
+        this.uri = process.env.MONGO_URI;
 
         // Cliente de MongoDB
         this.client = new MongoClient(this.uri);
 
-        // Configuración de base de datos y colección
-        this.dbName = 'ToDo';
-        this.collectionName = 'todoList';
+        // Configuración de base de datos y colección desde variables de entorno
+        this.dbName = process.env.DB_NAME;
+        this.collectionName = process.env.COLLECTION_NAME;
 
         // Referencias a la base de datos y colección (inicializadas en connect())
         this.db = null;
